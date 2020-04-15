@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This file is adaptation of
-https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/frontend/pom.xml
--->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>mock-exam-frontend</artifactId>
+
+    <artifactId>quiz-backend</artifactId>
     <packaging>jar</packaging>
+
     <parent>
-        <groupId>no.kristiania.mock.exam</groupId>
-        <artifactId>mock-exam</artifactId>
+        <groupId>org.example</groupId>
+        <artifactId>my-spring-boot-exercises</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <build>
         <plugins>
-            <plugin>
-            <!-- Need to create self-executable uber/fat jars for SpringBoot -->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <version>2.1.0.RELEASE</version>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>repackage</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -73,7 +57,6 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
                         <goals>
                             <goal>report-integration</goal>
                         </goals>
-
                     </execution>
                 </executions>
             </plugin>
@@ -90,89 +73,15 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
                     <argLine>${argLine} -Xms512m -Xmx4096m</argLine>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M4</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.1.0.RELEASE</version>
-                <configuration>
-                    <finalName>quizgame</finalName>
-                    <classifier>exec</classifier>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M4</version>
-                    <configuration>
-                        <forkCount>1</forkCount>
-                        <redirectTestOutputToFile>true</redirectTestOutputToFile>
-                        <rerunFailingTestsCount>3</rerunFailingTestsCount>
-                        <argLine>${argLine} -Xms512m -Xmx4096m</argLine>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>integration-test</goal>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>quiz-backend</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <!-- Add security to spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>2.1.0.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>javax.servlet.jsp.jstl-api</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-
-        <!-- So that we can use jsf files with spring boot -->
-        <dependency>
-            <groupId>org.joinfaces</groupId>
-            <artifactId>jsf-spring-boot-starter</artifactId>
-            <version>3.2.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
             <version>2.1.0.RELEASE</version>
         </dependency>
 
@@ -202,56 +111,17 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
         </dependency>
 
         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>2.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-support</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <version>1.12.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>selenium</artifactId>
-            <version>1.12.4</version>
-            <scope>test</scope>
-        </dependency>
+
 
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.141.59</version>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-remote-driver</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-
 
     </dependencies>
 
@@ -276,11 +146,11 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
                         <artifactId>junit</artifactId>
                     </exclusion>
                 </exclusions>
-
             </dependency>
 
 
         </dependencies>
     </dependencyManagement>
+
 
 </project>
