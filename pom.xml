@@ -10,6 +10,8 @@
 
     <modules>
         <module>frontend</module>
+        <module>backend</module>
+        <module>report</module>
     </modules>
 
 </project>
