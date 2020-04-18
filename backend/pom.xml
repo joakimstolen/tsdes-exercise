@@ -121,7 +121,10 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
             <scope>test</scope>
         </dependency>
 
-
+        <!--
+        Version is coming from springboot definitions
+        To get sql output for initial creation of table we have to remove this line
+        -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
