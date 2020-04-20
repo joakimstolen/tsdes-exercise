@@ -40,10 +40,7 @@
                     <h:outputLabel>Departure date: #{trip.departureDate}</h:outputLabel>
                     <h:outputLabel>Return date: #{trip.returnDate}</h:outputLabel>
                     <sec:authenticated>
-                        <h:outputLabel>#{trip.id}</h:outputLabel>
-                        <h:outputLabel>#{userInfoController.userName}</h:outputLabel>
                         <c:if test="#{travelController.isNotPurchased(trip.id,userInfoController.userName)}">
-                            <h:outputLabel>#{travelController.makePurchase(trip.id,userInfoController.userName)}</h:outputLabel>
                             <h:form prependId="false" id="bookingForm">
                                 <h:commandButton value="Book the trip"
                                                  action="#{travelController.makePurchase(trip.id,userInfoController.userName)}"
