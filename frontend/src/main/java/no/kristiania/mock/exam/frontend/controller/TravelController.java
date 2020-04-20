@@ -47,9 +47,9 @@ public class TravelController implements Serializable {
     public String makePurchase(Long tripID, String userID) {
         if (isNotPurchased(tripID,userID)) {
             purchaseService.newPurchase(tripID, userID);
-            return "details.jsf?tripID=" + tripID + "&isPurchased=true&faces-redirect=true";
+            return "details?tripID=" + tripID + "&isPurchased=true&faces-redirect=true";
         }else{
-            return "details.jsf?tripID=" + tripID + "&isPurchased=false&faces-redirect=true";
+            return "details?tripID=" + tripID + "&isPurchased=false&faces-redirect=true";
         }
     }
 

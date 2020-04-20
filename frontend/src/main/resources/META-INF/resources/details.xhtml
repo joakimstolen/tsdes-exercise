@@ -16,14 +16,7 @@
     <ui:define name="content">
         <c:set var="id" value="#{param['tripID']}"/>
         <c:set var="trip" value="#{travelController.getTrip(id)}"/>
-        <c:set var="tripID" value="#{trip.id}"/>
         <c:set var="isPurchased" value="#{param['isPurchased']}"/>
-        <h:form prependId="false" id="detailsForm">
-            <h:commandButton value="Details"
-                             action="index?faces-redirect=true"
-                             id="detailsBtn"/>
-        </h:form>
-
         <c:if test="#{!empty isPurchased}">
             <c:choose>
                 <c:when test="#{isPurchased.equals(true)}">
@@ -47,16 +40,15 @@
                     <h:outputLabel>Departure date: #{trip.departureDate}</h:outputLabel>
                     <h:outputLabel>Return date: #{trip.returnDate}</h:outputLabel>
                     <sec:authenticated>
-
                         <h:outputLabel>#{trip.id}</h:outputLabel>
                         <h:outputLabel>#{userInfoController.userName}</h:outputLabel>
                         <c:if test="#{travelController.isNotPurchased(trip.id,userInfoController.userName)}">
+                            <h:outputLabel>#{travelController.makePurchase(trip.id,userInfoController.userName)}</h:outputLabel>
                             <h:form prependId="false" id="bookingForm">
                                 <h:commandButton value="Book the trip"
                                                  action="#{travelController.makePurchase(trip.id,userInfoController.userName)}"
                                                  id="bookingBtn"/>
                             </h:form>
-
                         </c:if>
                     </sec:authenticated>
                     <div class="userInfoTable">
