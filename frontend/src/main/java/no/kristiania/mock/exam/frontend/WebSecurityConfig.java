@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         try {
             http.csrf().disable();
             http.authorizeRequests()
-                    .antMatchers("/", "/index.jsf", "/signup.jsf", "/assets/**").permitAll()
+                    .antMatchers("/", "/index.jsf","/details.jsf","/signup.jsf", "/assets/**").permitAll()
                     .antMatchers("/javax.faces.resource/**").permitAll()
                     .antMatchers("/ui/**").authenticated()
                     .anyRequest().authenticated()
@@ -68,14 +68,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             auth.jdbcAuthentication()
                     .dataSource(dataSource)
                     .usersByUsernameQuery(
-                            "SELECT username, password, enabled " +
-                                    "FROM users " +
-                                    "WHERE username = ?"
+                            "SELECT userid, hashed_password, enabled " +
+                                    "FROM user " +
+                                    "WHERE userid = ?"
                     )
                     .authoritiesByUsernameQuery(
-                            "SELECT x.username, y.roles " +
-                                    "FROM users x, user_roles y " +
-                                    "WHERE x.username = ? and y.user_username = x.username "
+                            "SELECT x.userid, y.roles " +
+                                    "FROM user x, user_roles y " +
+                                    "WHERE x.userid = ? and y.user_userid = x.userid "
                     )
                     /*
                         Note: in BCrypt, the "password" field also contains the salt

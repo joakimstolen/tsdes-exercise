@@ -1,0 +1,62 @@
+package no.kristiania.mock.exam.frontend.controller;
+
+import no.kristiania.mock.exam.backend.entity.Purchase;
+import no.kristiania.mock.exam.backend.entity.Trip;
+import no.kristiania.mock.exam.backend.services.PurchaseService;
+import no.kristiania.mock.exam.backend.services.TripService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Named
+@SessionScoped
+public class TravelController implements Serializable {
+
+    @Autowired
+    private TripService tripService;
+
+    @Autowired
+    private PurchaseService purchaseService;
+
+    public List<Trip> getTrips(int numberOfTrips) {
+        return tripService.getAllTrips(true).stream().limit(numberOfTrips).collect(Collectors.toList());
+    }
+
+    public String getTripRedirectionLink(int tripID) {
+        return "/details.jsf?tripID=" + tripID + "&faces-redirect=true";
+    }
+
+    public Trip getTrip(Long id) {
+        return tripService.getTrip(id, true);
+    }
+
+    public List<Trip> filterTripsBy(String searchBy, String query) {
+        if (searchBy.equals("byCost")) {
+            return tripService.filterByCost(Long.valueOf(query));
+        } else if (searchBy.equals("byLocation")) {
+            return tripService.filterTripsByLocation(query);
+        } else {
+            return null;
+        }
+    }
+
+    public String makePurchase(Long tripID, String userID) {
+        if (isNotPurchased(tripID,userID)) {
+            purchaseService.newPurchase(tripID, userID);
+            return "details.jsf?tripID=" + tripID + "&isPurchased=true&faces-redirect=true";
+        }else{
+            return "details.jsf?tripID=" + tripID + "&isPurchased=false&faces-redirect=true";
+        }
+    }
+
+    //If it was not purchased then trip for user is null
+    public Boolean isNotPurchased(Long tripID,String userID) {
+        List<Purchase> allPurchase = purchaseService.filterPurchasesByUser(userID);
+        return allPurchase.stream().filter(p -> p.getTripInformation().getId().equals(tripID)).findAny().orElse(null) == null;
+    }
+
+}

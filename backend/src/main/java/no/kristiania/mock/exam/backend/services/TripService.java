@@ -19,7 +19,7 @@ public class TripService {
 
     public List<Trip> getAllTrips(Boolean withTravelers) {
         TypedQuery<Trip> query = entityManager.createQuery(
-                "SELECT t FROM Trip t ORDER BY t.title ASC", Trip.class
+                "SELECT t FROM Trip t ORDER BY t.cost ASC", Trip.class
         );
         List<Trip> allTrips = query.getResultList();
 
@@ -78,7 +78,7 @@ public class TripService {
         entityManager.remove(tripToRemove);
     }
 
-        public List<Trip> filterTripsByLocation(String locationName) {
+    public List<Trip> filterTripsByLocation(String locationName) {
         TypedQuery<Trip> query = entityManager.createQuery(
                 "SELECT t FROM Trip t WHERE t.locationName =?1 ORDER BY t.cost ASC", Trip.class
         );
