@@ -15,15 +15,16 @@
     </title>
 </head>
 <body>
+<a id="homepageLinkId" href="index.jsf" class="btn  p-1 m-3 btn-outline-primary">Home page</a>
 <sec:authenticated>
-    <a id="logoutBtn" href="/logout">Logout</a>
-    <h:outputLabel>Welcome: </h:outputLabel><h:outputText id="userID" value="#{userInfoController.userName}"/>
+    <a id="logoutBtn" class="btn  p-1 m-3 btn-outline-danger" href="/logout">Logout</a>
+    <h:outputLabel>Welcome: </h:outputLabel><h:link class="btn  p-1 m-3 btn-outline-success"  id="userID" outcome="user" value="#{userInfoController.userName}"/>
 </sec:authenticated>
 
 <sec:anonymous>
     <p class="alert alert-warning">You are not logged in!</p>
-    <a id="linkToLoginId" href="login.jsf" class="btn btn-outline-danger">Log In</a>
-    <a id="linkToSignupId" href="signup.jsf" class="btn btn-outline-success">Sign Up</a>
+    <a id="linkToLoginId" href="login.jsf" class="btn p-1 m-3 btn-outline-danger">Log In</a>
+    <a id="linkToSignupId" href="signup.jsf" class="btn  p-1 m-3 btn-outline-success">Sign Up</a>
 </sec:anonymous>
 
 <ui:insert name="content"/>

@@ -17,9 +17,18 @@
         <c:set var="id" value="#{param['tripID']}"/>
         <c:set var="trip" value="#{travelController.getTrip(id)}"/>
         <c:set var="isPurchased" value="#{param['isPurchased']}"/>
+        <sec:authenticated>
+            <h:form prependId="false" id="bookingForm"
+                    rendered="#{travelController.isNotPurchased(trip.id,userInfoController.userName)}">
+                <h:commandButton value="Book the trip"
+                                 action="#{travelController.makePurchase(userInfoController.userName)}"
+                                 id="bookingBtn"/>
+            </h:form>
+        </sec:authenticated>
+
         <c:if test="#{!empty isPurchased}">
             <c:choose>
-                <c:when test="#{isPurchased.equals(true)}">
+                <c:when test="#{isPurchased.equals('true')}">
                     <p>Purchase was sucesfull!</p>
                 </c:when>
                 <c:otherwise>
@@ -39,19 +48,15 @@
                     <h:outputLabel>Name of location: #{trip.locationName}</h:outputLabel>
                     <h:outputLabel>Departure date: #{trip.departureDate}</h:outputLabel>
                     <h:outputLabel>Return date: #{trip.returnDate}</h:outputLabel>
-                    <sec:authenticated>
-                        <c:if test="#{travelController.isNotPurchased(trip.id,userInfoController.userName)}">
-                            <h:form prependId="false" id="bookingForm">
-                                <h:commandButton value="Book the trip"
-                                                 action="#{travelController.makePurchase(trip.id,userInfoController.userName)}"
-                                                 id="bookingBtn"/>
-                            </h:form>
-                        </c:if>
-                    </sec:authenticated>
+
                     <div class="userInfoTable">
                         <p class="alert alert-dark">Users taking this trip</p>
                         <h:dataTable styleClass="table table-hover" value="#{trip.allTravelers}"
                                      var="user" border="1" id="tripTable">
+                            <h:column>
+                                <f:facet name="header">User ID</f:facet>
+                                <h:outputText value="#{user.userID}"/>
+                            </h:column>
                             <h:column>
                                 <f:facet name="header">Name</f:facet>
                                 <h:outputText value="#{user.name}"/>

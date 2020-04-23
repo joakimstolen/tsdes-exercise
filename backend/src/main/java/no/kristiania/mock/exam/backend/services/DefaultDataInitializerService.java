@@ -77,6 +77,24 @@ public class DefaultDataInitializerService {
                         LocalDate.of(2021, 2, 22),
                         LocalDate.of(2021, 3, 2))
         );
+        Long usaTrip = attempt(() ->
+                tripService.createTrip(
+                        "Trip to USA",
+                        "Visit New York, the big apple, city that never sleeps",
+                        5000L,
+                        "New York",
+                        LocalDate.of(2021, 2, 22),
+                        LocalDate.of(2021, 3, 2))
+        );
+        Long germanTrip = attempt(() ->
+                tripService.createTrip(
+                        "Trip to Germany",
+                        "Visit Munich, city of FC Bayern",
+                        4000L,
+                        "Munich",
+                        LocalDate.of(2021, 2, 22),
+                        LocalDate.of(2021, 3, 2))
+        );
 
         //Okay, lets start purchasing
         //Bosnian trip
@@ -90,6 +108,8 @@ public class DefaultDataInitializerService {
         purchaseService.newPurchase(italianTrip,secondUser);
         purchaseService.newPurchase(italianTrip,thirdUser);
         //Second italian trip
+        purchaseService.newPurchase(secondItalianTrip, secondUser);
+        //German trip
         purchaseService.newPurchase(secondItalianTrip, secondUser);
 
     }

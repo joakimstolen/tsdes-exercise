@@ -49,7 +49,7 @@ public class UserService {
         if(user == null){
             throw new IllegalStateException("No user with given userName");
         }
-
+        user.getBookedTrips().size();
         return user;
     }
 }

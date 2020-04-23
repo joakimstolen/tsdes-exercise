@@ -8,3 +8,8 @@
     box-shadow: black;
     margin:30px;
 }
+
+.searchBox{
+    display: inline-block !important;
+    max-width: 400px !important;
+}

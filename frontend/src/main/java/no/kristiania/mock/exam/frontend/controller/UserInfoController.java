@@ -1,7 +1,9 @@
 package no.kristiania.mock.exam.frontend.controller;
 
 import no.kristiania.mock.exam.backend.entity.Purchase;
+import no.kristiania.mock.exam.backend.entity.User;
 import no.kristiania.mock.exam.backend.services.PurchaseService;
+import no.kristiania.mock.exam.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +23,15 @@ public class UserInfoController {
     @Autowired
     private PurchaseService purchaseService;
 
+    @Autowired
+    private UserService userService;
+
     public String getUserName() {
         return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+    }
+
+    public User getUser(){
+        return userService.findUserByUserName(getUserName());
     }
 
     public List<Purchase> listPurchases() {

@@ -22,11 +22,14 @@ public class TravelController implements Serializable {
     @Autowired
     private PurchaseService purchaseService;
 
+    private Long tripID;
+
     public List<Trip> getTrips(int numberOfTrips) {
         return tripService.getAllTrips(true).stream().limit(numberOfTrips).collect(Collectors.toList());
     }
 
-    public String getTripRedirectionLink(int tripID) {
+    public String getTripRedirectionLink(Long tripID) {
+        this.tripID = tripID;
         return "/details.jsf?tripID=" + tripID + "&faces-redirect=true";
     }
 
@@ -44,7 +47,7 @@ public class TravelController implements Serializable {
         }
     }
 
-    public String makePurchase(Long tripID, String userID) {
+    public String makePurchase(String userID) {
         if (isNotPurchased(tripID,userID)) {
             purchaseService.newPurchase(tripID, userID);
             return "details?tripID=" + tripID + "&isPurchased=true&faces-redirect=true";
