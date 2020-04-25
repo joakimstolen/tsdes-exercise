@@ -2,7 +2,6 @@
 <!-- This file is adaptation of
 https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/frontend/pom.xml
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -16,18 +15,11 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
     </parent>
     <build>
         <plugins>
+            <!-- For cloud deployment on Heroku -->
             <plugin>
-                <!-- Need to create self-executable uber/fat jars for SpringBoot -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.1.0.RELEASE</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>2.0.2</version>
             </plugin>
 
             <plugin>
@@ -115,6 +107,23 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
         </plugins>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>com.heroku.sdk</groupId>
+                    <artifactId>heroku-maven-plugin</artifactId>
+                    <version>2.0.2</version>
+                    <configuration>
+                        <appName>travel-agency-mock</appName>
+                        <includeTarget>false</includeTarget>
+                        <includes>
+                            <include>target/mock-exam-exec.jar</include>
+                        </includes>
+                        <processTypes>
+                            <web>java -Dserver.port=$PORT -jar target/mock-exam-exec.jar</web>
+                        </processTypes>
+                        <jdkVersion>11</jdkVersion>
+                    </configuration>
+                </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
