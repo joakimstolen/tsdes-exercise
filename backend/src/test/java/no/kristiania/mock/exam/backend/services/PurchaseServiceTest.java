@@ -2,7 +2,7 @@ package no.kristiania.mock.exam.backend.services;
 
 import no.kristiania.mock.exam.backend.TestApplication;
 import no.kristiania.mock.exam.backend.entity.Purchase;
-import no.kristiania.mock.exam.backend.entity.User;
+import no.kristiania.mock.exam.backend.entity.Users;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +44,12 @@ public class PurchaseServiceTest extends ServiceTestBase{
         Long secondTrip = tripService.createTrip("Test-2", "My desc-2", 300L, "Norway", LocalDate.now(), LocalDate.of(2020, 9, 21));
         Long firstPurchase = purchaseService.newPurchase(firstTrip, userName);
         Long secondPurchase = purchaseService.newPurchase(secondTrip, userName);
-        User user = userService.findUserByUserName(userName);
+        Users users = userService.findUserByUserName(userName);
         assertNotNull(firstPurchase);
         assertNotNull(secondPurchase);
 
 
-        List<Purchase> userPurchases = purchaseService.filterPurchasesByUser(user.getUserID());
+        List<Purchase> userPurchases = purchaseService.filterPurchasesByUser(users.getUserID());
 
         assertEquals(2, userPurchases.size());
     }

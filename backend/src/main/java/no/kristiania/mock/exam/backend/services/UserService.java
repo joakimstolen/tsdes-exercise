@@ -1,6 +1,6 @@
 package no.kristiania.mock.exam.backend.services;
 
-import no.kristiania.mock.exam.backend.entity.User;
+import no.kristiania.mock.exam.backend.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,30 +26,30 @@ public class UserService {
         String hashedPassword = passwordEncoder.encode(password);
 
         //If there is user with given username or email in database we can not create it again, return false
-        if((em.find(User.class, userName) != null) || (em.find(User.class, email) != null)){
+        if((em.find(Users.class, userName) != null) || (em.find(Users.class, email) != null)){
             return false;
         }
 
-        User user = new User();
-        user.setUserID(userName);
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setHashedPassword(hashedPassword);
-        user.setRoles(Collections.singleton(role));
-        user.setEnabled(true);
-        user.setEmail(email);
+        Users users = new Users();
+        users.setUserID(userName);
+        users.setName(name);
+        users.setLastName(lastName);
+        users.setHashedPassword(hashedPassword);
+        users.setRoles(Collections.singleton(role));
+        users.setEnabled(true);
+        users.setEmail(email);
 
-        em.persist(user);
+        em.persist(users);
 
         return true;
     }
 
-    public User findUserByUserName(String userName){
-        User user = em.find(User.class,userName);
-        if(user == null){
+    public Users findUserByUserName(String userName){
+        Users users = em.find(Users.class,userName);
+        if(users == null){
             throw new IllegalStateException("No user with given userName");
         }
-        user.getBookedTrips().size();
-        return user;
+        users.getBookedTrips().size();
+        return users;
     }
 }

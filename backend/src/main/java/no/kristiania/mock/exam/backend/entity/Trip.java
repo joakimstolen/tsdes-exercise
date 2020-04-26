@@ -43,7 +43,7 @@ public class Trip {
     //That is why we have many to many relationship
     //Default Lazy fetch is fine, as it is not expected that we are going to need all travelers that often
     @ManyToMany(mappedBy = "bookedTrips")
-    private List<User> allTravelers;
+    private List<Users> allTravelers;
 
     public Trip() {
     }
@@ -104,11 +104,11 @@ public class Trip {
         this.returnDate = returnDate;
     }
 
-    public List<User> getAllTravelers() {
+    public List<Users> getAllTravelers() {
         return allTravelers;
     }
 
-    public void setAllTravelers(List<User> allTravelers) {
+    public void setAllTravelers(List<Users> allTravelers) {
         this.allTravelers = allTravelers;
     }
 }

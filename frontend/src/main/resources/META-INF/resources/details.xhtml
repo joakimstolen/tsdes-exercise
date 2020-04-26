@@ -52,18 +52,18 @@
                     <div class="userInfoTable">
                         <p class="alert alert-dark">Users taking this trip</p>
                         <h:dataTable styleClass="table table-hover" value="#{trip.allTravelers}"
-                                     var="user" border="1" id="tripTable">
+                                     var="users" border="1" id="tripTable">
                             <h:column>
                                 <f:facet name="header">User ID</f:facet>
-                                <h:outputText value="#{user.userID}"/>
+                                <h:outputText value="#{users.userID}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Name</f:facet>
-                                <h:outputText value="#{user.name}"/>
+                                <h:outputText value="#{users.name}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Last name</f:facet>
-                                <h:outputText value="#{user.lastName}"/>
+                                <h:outputText value="#{users.lastName}"/>
                             </h:column>
 
                         </h:dataTable>

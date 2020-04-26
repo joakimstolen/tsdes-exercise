@@ -16,11 +16,11 @@
 
 
     <ui:define name="content">
-        <c:set var = "user" value="#{userInfoController.user}"/>
+        <c:set var = "users" value="#{userInfoController.user}"/>
         <br/>
-        <h:outputLabel id="userNameID">User name: #{user.name}</h:outputLabel><br/>
-        <h:outputLabel>User last name: #{user.lastName}</h:outputLabel><br/>
-        <h:dataTable styleClass="table table-hover" value="#{user.bookedTrips}"
+        <h:outputLabel id="userNameID">User name: #{users.name}</h:outputLabel><br/>
+        <h:outputLabel>User last name: #{users.lastName}</h:outputLabel><br/>
+        <h:dataTable styleClass="table table-hover" value="#{users.bookedTrips}"
                      var="trip" border="1" id="tripTable">
             <h:column>
                 <f:facet name="header">Title</f:facet>

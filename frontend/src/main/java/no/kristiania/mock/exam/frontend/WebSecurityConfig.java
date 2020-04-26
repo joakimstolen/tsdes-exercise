@@ -69,13 +69,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .dataSource(dataSource)
                     .usersByUsernameQuery(
                             "SELECT userid, hashed_password, enabled " +
-                                    "FROM user " +
+                                    "FROM users " +
                                     "WHERE userid = ?"
                     )
                     .authoritiesByUsernameQuery(
                             "SELECT x.userid, y.roles " +
-                                    "FROM user x, user_roles y " +
-                                    "WHERE x.userid = ? and y.user_userid = x.userid "
+                                    "FROM users x, users_roles y " +
+                                    "WHERE x.userid = ? and y.users_userid = x.userid "
                     )
                     /*
                         Note: in BCrypt, the "password" field also contains the salt

@@ -10,7 +10,7 @@ import java.util.Set;
 
 //User: having info like name, surname, hashed-password, email, etc.
 @Entity
-public class User {
+public class Users {
     //Could just use email as primary key, but I think it is easier to login with ID then with email (lengthwise)
     @Id
     @NotBlank

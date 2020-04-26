@@ -2,7 +2,7 @@ package no.kristiania.mock.exam.backend.services;
 
 import no.kristiania.mock.exam.backend.TestApplication;
 import no.kristiania.mock.exam.backend.entity.Trip;
-import no.kristiania.mock.exam.backend.entity.User;
+import no.kristiania.mock.exam.backend.entity.Users;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class TripServiceTest extends ServiceTestBase {
         assertNotNull(id);
 
         Trip myTrip = tripService.getTrip(id, true);
-        List<User> users = myTrip.getAllTravelers();
+        List<Users> users = myTrip.getAllTravelers();
         assertNotNull(myTrip);
     }
 

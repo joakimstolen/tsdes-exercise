@@ -2,7 +2,7 @@ package no.kristiania.mock.exam.backend.services;
 
 import no.kristiania.mock.exam.backend.entity.Purchase;
 import no.kristiania.mock.exam.backend.entity.Trip;
-import no.kristiania.mock.exam.backend.entity.User;
+import no.kristiania.mock.exam.backend.entity.Users;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
@@ -20,12 +20,12 @@ public class ResetService {
     private EntityManager entityManager;
 
     public void resetDatabase(){
-        Query query = entityManager.createNativeQuery("DELETE FROM user_roles");
+        Query query = entityManager.createNativeQuery("DELETE FROM users_roles");
         query.executeUpdate();
 
         deleteEntities(Purchase.class);
         deleteEntities(Trip.class);
-        deleteEntities(User.class);
+        deleteEntities(Users.class);
     }
 
     private void deleteEntities(Class<?> entity) {

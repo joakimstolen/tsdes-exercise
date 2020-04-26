@@ -14,7 +14,7 @@ public class Purchase {
 
     @OneToOne//One purchase is connected to one user
     @NotNull
-    private User bookedBy;
+    private Users bookedBy;
 
     @NotNull
     private LocalDate dateOfBooking;
@@ -38,11 +38,11 @@ public class Purchase {
         this.id = id;
     }
 
-    public User getBookedBy() {
+    public Users getBookedBy() {
         return bookedBy;
     }
 
-    public void setBookedBy(User bookedBy) {
+    public void setBookedBy(Users bookedBy) {
         this.bookedBy = bookedBy;
     }
 

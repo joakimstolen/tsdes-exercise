@@ -2,7 +2,7 @@ package no.kristiania.mock.exam.backend.services;
 
 import no.kristiania.mock.exam.backend.entity.Purchase;
 import no.kristiania.mock.exam.backend.entity.Trip;
-import no.kristiania.mock.exam.backend.entity.User;
+import no.kristiania.mock.exam.backend.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,20 +35,20 @@ public class PurchaseService {
 
     public Long newPurchase(Long tripID, String userID) {
         Trip trip = entityManager.find(Trip.class, tripID);
-        User user = entityManager.find(User.class, userID);
+        Users users = entityManager.find(Users.class, userID);
 
         if (trip == null) {
             throw new IllegalStateException("Trip not found");
         }
-        if (user == null) {
+        if (users == null) {
             throw new IllegalStateException("User not found");
         }
 
         Purchase purchase = new Purchase();
-        purchase.setBookedBy(user);
+        purchase.setBookedBy(users);
         purchase.setDateOfBooking(LocalDate.now());
         purchase.setTripInformation(trip);
-        user.getBookedTrips().add(trip);
+        users.getBookedTrips().add(trip);
         entityManager.persist(purchase);
 
         return purchase.getId();

@@ -1,7 +1,7 @@
 package no.kristiania.mock.exam.frontend.controller;
 
 import no.kristiania.mock.exam.backend.entity.Purchase;
-import no.kristiania.mock.exam.backend.entity.User;
+import no.kristiania.mock.exam.backend.entity.Users;
 import no.kristiania.mock.exam.backend.services.PurchaseService;
 import no.kristiania.mock.exam.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class UserInfoController {
         return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     }
 
-    public User getUser(){
+    public Users getUser(){
         return userService.findUserByUserName(getUserName());
     }
 

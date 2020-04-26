@@ -1,5 +1,4 @@
 create sequence hibernate_sequence start with 1 increment by 1;
-
 create table purchase
 (
     id                  bigint       not null,
@@ -8,7 +7,6 @@ create table purchase
     trip_information_id bigint       not null,
     primary key (id)
 );
-
 create table trip
 (
     id             bigint       not null,
@@ -20,8 +18,7 @@ create table trip
     title          varchar(300),
     primary key (id)
 );
-
-create table user
+create table users
 (
     userid          varchar(255) not null,
     email           varchar(255),
@@ -31,33 +28,25 @@ create table user
     name            varchar(128),
     primary key (userid)
 );
-
-create table user_booked_trips
+create table users_booked_trips
 (
     all_travelers_userid varchar(255) not null,
     booked_trips_id      bigint       not null
 );
-
-create table user_roles
+create table users_roles
 (
-    user_userid varchar(255) not null,
-    roles       varchar(255)
+    users_userid varchar(255) not null,
+    roles        varchar(255)
 );
-
-alter table user
-    add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email);
-
+alter table users
+    add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email);
 alter table purchase
-    add constraint FK5g5i7emj2oys98pvenioxt9vt foreign key (booked_by_userid) references user;
-
+    add constraint FKex4wa959mkii4fwx3s210ug24 foreign key (booked_by_userid) references users;
 alter table purchase
     add constraint FK3tv91lsph9bbpk4lpdu231yn0 foreign key (trip_information_id) references trip;
-
-alter table user_booked_trips
-    add constraint FKfns7qb17qidjyr7fyxfpg1lym foreign key (booked_trips_id) references trip;
-
-alter table user_booked_trips
-    add constraint FKn5lstcrpf3fxue2ut10j40vft foreign key (all_travelers_userid) references user;
-
-alter table user_roles
-    add constraint FK6n7ipu0muw6e5rth6oj7a0aq0 foreign key (user_userid) references user;
+alter table users_booked_trips
+    add constraint FKqsn5ohuprxkk1s7cd348e8btl foreign key (booked_trips_id) references trip;
+alter table users_booked_trips
+    add constraint FK2d6a73d4l6qaq1th7ni5po6rj foreign key (all_travelers_userid) references users;
+alter table users_roles
+    add constraint FKnqgxij5udu4xrsqju9dtbc8pr foreign key (users_userid) references users;

@@ -15,13 +15,6 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
     </parent>
     <build>
         <plugins>
-            <!-- For cloud deployment on Heroku -->
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>2.0.2</version>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -107,6 +100,7 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
         </plugins>
         <pluginManagement>
             <plugins>
+                <!-- command: "mvn clean package heroku:deploy -Dheroku.logProgress=true " -->
                 <plugin>
                     <groupId>com.heroku.sdk</groupId>
                     <artifactId>heroku-maven-plugin</artifactId>
@@ -115,7 +109,7 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
                         <appName>travel-agency-mock</appName>
                         <includeTarget>false</includeTarget>
                         <includes>
-                            <include>target/mock-exam-exec.jar</include>
+                            <include>frontend/target/mock-exam-exec.jar</include>
                         </includes>
                         <processTypes>
                             <web>java -Dserver.port=$PORT -jar target/mock-exam-exec.jar</web>
@@ -123,7 +117,6 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems/blob
                         <jdkVersion>11</jdkVersion>
                     </configuration>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
